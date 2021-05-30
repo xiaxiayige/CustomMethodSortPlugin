@@ -1,0 +1,32 @@
+<idea-plugin>
+    <id>com.xiaxiayige.plugin.CustomMethodSortPlugin</id>
+    <name>CostomMethodSort</name>
+    <vendor email="xiaxiayige@163.com" url="http://github.com/xiaxiayige">xiaxiayige</vendor>
+
+    <description><![CDATA[
+    costom method sort<br>
+    <em> costom method sort for your rule</em>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <!--    <depends>com.intellij.modules.androidstudio</depends>-->
+    <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+
+        <action class="com.xiaxiayige.plugin.action.CostomMethodSortAction" id="com.xiaxiayige.plugin.action.CostomMethodSort"
+                text="Custom Sort Methods"
+                description="Places the sorted methods at the start of the class">
+            <keyboard-shortcut first-keystroke="control alt K" keymap="$default"/>
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+        </action>
+
+    </actions>
+</idea-plugin>
