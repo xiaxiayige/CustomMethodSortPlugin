@@ -1,7 +1,7 @@
 plugins {
     id("org.jetbrains.intellij") version "0.6.5"
     java
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.31"
 }
 
 group = "com.xiaxiayige.plugin."
@@ -17,10 +17,9 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = "2020.1.1"
+    version = "IC-202.7660.26"
     setPlugins("java","android","Kotlin")
     localPath = "C:\\Program Files\\Android\\Android Studio"
-
 }
 
 configure<JavaPluginConvention> {
@@ -32,11 +31,6 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
-    }
-}
-tasks {
-    runPluginVerifier {
-        ideVersions(listOf<String>("2020.1.1"))
     }
 }
 
