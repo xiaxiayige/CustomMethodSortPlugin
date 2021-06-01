@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.4.31"
 }
 
-group = "com.xiaxiayige.plugin."
+group = "com.xiaxiayige.plugin.methodsort"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -51,6 +51,7 @@ tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml
       3.Show your code style
       
       4.Now supports Java and Kotlin method sort
+      
       """
     )
 }

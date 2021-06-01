@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.xiaxiayige.plugin.CustomMethodSortPlugin</id>
+    <id>com.xiaxiayige.plugin.methodsort</id>
     <name>CostomMethodSort</name>
     <vendor email="xiaxiayige@163.com" url="http://github.com/xiaxiayige">xiaxiayige</vendor>
 
@@ -28,7 +28,7 @@
         <action class="com.xiaxiayige.plugin.action.CostomMethodSortAction" id="com.xiaxiayige.plugin.action.CostomMethodSort"
                 text="Custom Sort Methods"
                 description="Places the sorted methods at the start of the class">
-            <keyboard-shortcut first-keystroke="control alt K" keymap="$default"/>
+<!--            <keyboard-shortcut first-keystroke="control alt K" keymap="$default"/>-->
             <add-to-group group-id="CodeMenu" anchor="last"/>
         </action>
 
