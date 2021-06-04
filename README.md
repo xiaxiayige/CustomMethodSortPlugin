@@ -26,7 +26,7 @@ Custom method sort
 
 
 
-![](img/demo.gif)
+![](./img/demo.gif)
 
 
 
