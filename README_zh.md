@@ -27,7 +27,7 @@
 
 效果
 
-![](img/demo.gif)
+<img src="https://i.imgur.com/OvsA3Zj.gif"/>
 
 
 
