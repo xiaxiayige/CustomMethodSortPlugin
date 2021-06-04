@@ -19,8 +19,13 @@ dependencies {
 intellij {
     version = "IC-202.7660.26"
     setPlugins("java", "android", "Kotlin")
-    localPath = "C:\\Program Files\\Android\\Android Studio"
+//    localPath = "C:\\Program Files\\Android\\Android Studio"
 }
+
+tasks.runIde {
+    jvmArgs("--add-exports", "java.base/jdk.internal.vm=ALL-UNNAMED")
+}
+
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -33,6 +38,7 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
+
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes(
