@@ -24,9 +24,8 @@ Custom method sort
 
 	call 'Code---->Custom Sort Methods'
 
+<img src="https://i.imgur.com/OvsA3Zj.gif"/>
 
-
-[](https://i.imgur.com/OvsA3Zj.gif)
 
 
 
