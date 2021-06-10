@@ -1,11 +1,38 @@
 <idea-plugin>
     <id>com.xiaxiayige.plugin.methodsort</id>
     <name>CostomMethodSort</name>
-    <vendor email="xiaxiayige@163.com" url="http://github.com/xiaxiayige">xiaxiayige</vendor>
+    <vendor email="xiaxiayige@163.com" url="https://github.com/xiaxiayige">xiaxiayige</vendor>
 
     <description><![CDATA[
-    costom method sort<br>
-    <em> costom method sort for your rule</em>
+
+    Custom method sort
+<p>
+    [中文版](README_zh.md)  <br>
+</p>
+    Only support Java And Kotlin Method sort <br>
+
+    <h2>setp 1</h2>
+<p>
+    add 'sortMethod.rule' file in your project root directory <br>
+
+    file name must is 'sortMethod.rule'<br>
+</p>
+    <h2> setp 2 </h2>
+<p>
+    input sort method name，eg:<br>
+
+    aa<br>
+    bb<br>
+    cc<br>
+</p>
+
+    <h2>  setp 3 </h2>
+
+    call 'Code---->Custom Sort Methods' <br>
+
+    <img src="https://i.imgur.com/OvsA3Zj.gif"/>
+
+
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -25,10 +52,11 @@
 
     <actions>
 
-        <action class="com.xiaxiayige.plugin.action.CostomMethodSortAction" id="com.xiaxiayige.plugin.action.CostomMethodSort"
+        <action class="com.xiaxiayige.plugin.action.CostomMethodSortAction"
+                id="com.xiaxiayige.plugin.action.CostomMethodSort"
                 text="Custom Sort Methods"
                 description="Places the sorted methods at the start of the class">
-<!--            <keyboard-shortcut first-keystroke="control alt K" keymap="$default"/>-->
+            <keyboard-shortcut first-keystroke="control alt K" keymap="$default"/>
             <add-to-group group-id="CodeMenu" anchor="last"/>
         </action>
 
