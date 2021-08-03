@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.xiaxiayige.plugin.methodsort"
-version = "1.0-SNAPSHOT"
+version = "1.0.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = "IC-202.7660.26"
+//    version = "IC-202.7660.26"
     setPlugins("java", "android", "Kotlin")
 //    localPath = "C:\\Program Files\\Android\\Android Studio"
 }
@@ -39,25 +39,26 @@ tasks {
     }
 }
 
-//"""
-//      How to use .<br>
-//      1.Add ‘sortMethod.rule’ file to your project dir. <br>
-//      eg: <br>
-//            aa <br>
-//            bb <br>
-//            cc <br>
-//       <br>
-//       input your method name,one method name per line.<br>
-//
-//      2.Code menu ---> Custom Sort Methods <br>
-//
-//      3.Show your code style <br>
-//
-//      4.Now supports Java and Kotlin method sort <br>
-//
-//      """
+
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes(
-        ""
+        """
+          How to use .<br>
+          1.Add ‘sortMethod.rule’ file to your project dir. <br>
+          eg: <br>
+                aa <br>
+                bb <br>
+                cc <br>
+           <br>
+           
+           input your method name,one method name per line.<br>
+    
+          2.Code menu ---> Custom Sort Methods <br>
+    
+          3.Show your code style <br>
+    
+          4.Now supports Java and Kotlin method sort <br>
+
+      """
     )
 }
