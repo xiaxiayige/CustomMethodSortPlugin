@@ -8,6 +8,7 @@ Custom method sort
 # setp 1
 
 	 add 'sortMethod.rule' file in your project root directory ，
+you can download this file [sortMethod.rule](https://github.com/xiaxiayige/CustomMethodSortPlugin/blob/main/sortMethod.rule) , replace your method name.
 
      file name must is 'sortMethod.rule' 
 
