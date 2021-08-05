@@ -27,6 +27,10 @@ you can download this file [sortMethod.rule](https://github.com/xiaxiayige/Custo
 
 <img src="https://i.imgur.com/OvsA3Zj.gif"/>
 
+# Change Note
+
+    1.0.2 support Android Studio Arctic Fox 
+
 
 
 

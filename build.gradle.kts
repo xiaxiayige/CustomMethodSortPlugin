@@ -9,6 +9,7 @@ version = "1.0.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    google()
 }
 
 dependencies {
@@ -17,10 +18,12 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-//    version = "IC-202.7660.26"
     setPlugins("java", "android", "Kotlin")
+    version = "203.7717.56"
 //    localPath = "C:\\Program Files\\Android\\Android Studio"
+//    localPath = "F:\\Program Files\\Android\\Android Studio New"
 }
+
 
 tasks.runIde {
     jvmArgs("--add-exports", "java.base/jdk.internal.vm=ALL-UNNAMED")
@@ -39,10 +42,9 @@ tasks {
     }
 }
 
-
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes(
-        """
+            """
           How to use .<br>
           1.Add ‘sortMethod.rule’ file to your project dir. <br>
           eg: <br>
@@ -58,6 +60,10 @@ tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml
           3.Show your code style <br>
     
           4.Now supports Java and Kotlin method sort <br>
+          
+          ChangeNote:<br>
+          
+          1.0.2 support Android Studio Arctic Fox 
 
       """
     )
