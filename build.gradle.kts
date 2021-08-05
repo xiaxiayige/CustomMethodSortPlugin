@@ -4,8 +4,13 @@ plugins {
     kotlin("jvm") version "1.4.31"
 }
 
-group = "com.xiaxiayige.plugin.methodsort"
-version = "1.0.2-SNAPSHOT"
+val pluginGroup: String by project
+val pluginVersion: String by project
+val pluginSinceBuild: String by project
+val pluginUntilBuild: String by project
+
+group = pluginGroup
+version = pluginVersion
 
 repositories {
     mavenCentral()
@@ -19,9 +24,12 @@ dependencies {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     setPlugins("java", "android", "Kotlin")
-    version = "203.7717.56"
-//    localPath = "C:\\Program Files\\Android\\Android Studio"
-//    localPath = "F:\\Program Files\\Android\\Android Studio New"
+}
+
+tasks.patchPluginXml {
+    version(pluginVersion)
+    sinceBuild(pluginSinceBuild)
+    untilBuild(pluginUntilBuild)
 }
 
 
@@ -33,6 +41,7 @@ tasks.runIde {
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
@@ -64,6 +73,8 @@ tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml
           ChangeNote:<br>
           
           1.0.2 support Android Studio Arctic Fox 
+          
+          1.0.4 support more height version
 
       """
     )

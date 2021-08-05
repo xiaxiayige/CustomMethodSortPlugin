@@ -33,8 +33,9 @@
     <img src="https://i.imgur.com/OvsA3Zj.gif"/>
 
     <h2> Change Note </h2>
-    1.0.2 support Android Studio Arctic Fox
+    1.0.2 support Android Studio Arctic Fox <br>
 
+    1.0.4 support more height version
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -45,13 +46,6 @@
     <depends>org.jetbrains.kotlin</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends>org.jetbrains.android</depends>
-    <!--Android Studio 4.1 -->
-    <!--    <idea-version since-build="193" until-build="193.*"/>-->
-    <!--Android Studio 4.2 -->
-    <!--    <idea-version since-build="202" until-build="202.*"/>-->
-    <!--Android Studio Arctic fox -->
-    <idea-version since-build="203" until-build="203.*"/>
-
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
