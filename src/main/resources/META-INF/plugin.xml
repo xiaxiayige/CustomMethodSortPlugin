@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.xiaxiayige.plugin.methodsort</id>
-    <name>CostomMethodSort</name>
+    <name>CustomMethodSort</name>
     <vendor email="xiaxiayige@163.com" url="https://github.com/xiaxiayige">xiaxiayige</vendor>
 
     <description><![CDATA[
