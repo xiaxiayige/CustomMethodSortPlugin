@@ -1,7 +1,7 @@
 plugins {
     id("org.jetbrains.intellij") version "0.6.5"
     java
-    kotlin("jvm") version "1.4.31"
+    kotlin("jvm") version "1.5.10"
 }
 
 val pluginGroup: String by project
@@ -15,6 +15,8 @@ version = pluginVersion
 repositories {
     mavenCentral()
     google()
+    maven(url = "https://www.jetbrains.com/intellij-repository/snapshots")
+    maven(url = "https://cache-redirector.jetbrains.com/intellij-dependencies")
 }
 
 dependencies {
@@ -24,6 +26,7 @@ dependencies {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     setPlugins("java", "android", "Kotlin")
+    instrumentCode = false
 }
 
 tasks.patchPluginXml {
@@ -53,7 +56,7 @@ tasks {
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes(
-            """
+        """
           How to use .<br>
           1.Add ‘sortMethod.rule’ file to your project dir. <br>
           eg: <br>

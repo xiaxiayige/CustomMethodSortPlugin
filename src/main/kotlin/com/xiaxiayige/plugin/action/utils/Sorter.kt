@@ -52,7 +52,7 @@ class Sorter(private val psiClass: PsiClass) {
      * 删除原来的方法
      */
     private fun deleteOldKtNameFunctionMetthod() {
-        methods.forEach { (t, u) ->
+        methods.forEach { (_, u) ->
             u.delete()
         }
     }
