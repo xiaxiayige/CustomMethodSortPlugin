@@ -34,6 +34,8 @@ class Sorter(private val psiClass: PsiClass) {
             }
         }
 
+        // TODO: 2021/8/25 将构造方法排在最前面
+
         //1.添加规则中的方法
         rule.forEach { name ->
             methods.forEach { (methodName, psiMethod) ->

@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtNamedFunction
 /***
  * 对Kotlin文件排序
  */
-class SorterKt(val ktClass: KtClass) {
+class SorterKt(private val ktClass: KtClass) {
 
     /***
      * 原始的方法列表
@@ -44,7 +44,7 @@ class SorterKt(val ktClass: KtClass) {
         //所有带有Override注解的方法
         val overrideListMethod = ArrayList<KtNamedFunction>()
         methods.forEach {
-            if (it.value.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false) {
+            if (it.value.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) == true) {
                 overrideListMethod.add(it.value)
             }
         }
@@ -81,7 +81,10 @@ class SorterKt(val ktClass: KtClass) {
         resultMethods: LinkedHashMap<String, KtNamedFunction>,
         psiElement: PsiElement
     ) {
-        resultMethods.forEach { ktClass.addBefore(it.value, psiElement) }
+        // TODO: 2021/8/25 在没有方法体的后面 添加一个空行
+        resultMethods.forEach {
+            ktClass.addBefore(it.value, psiElement)
+        }
     }
 
     //删除原来的方法

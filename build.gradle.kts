@@ -26,6 +26,7 @@ dependencies {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     setPlugins("java", "android", "Kotlin")
+    localPath = "C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.2"
     instrumentCode = false
 }
 
