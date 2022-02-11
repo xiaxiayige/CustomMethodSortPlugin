@@ -1,7 +1,13 @@
 package com.xiaxiayige.plugin.action.utils
 
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiManager
+import com.intellij.psi.codeStyle.CodeStyleManager
+import com.intellij.util.IncorrectOperationException
+import org.jetbrains.kotlin.idea.util.addAnnotation
+import org.jetbrains.kotlin.j2k.isInSingleLine
 import org.jetbrains.kotlin.lexer.KtTokens
+import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtNamedFunction
 
@@ -60,7 +66,7 @@ class SorterKt(private val ktClass: KtClass) {
         }
 
         //2.添加重写的方法
-        overrideListMethod.forEach { resultMethods[it.name?:""] = it }
+        overrideListMethod.forEach { resultMethods[it.name ?: ""] = it }
 
         //3.添加剩余的方法
         methods.forEach { (t, u) -> resultMethods[t] = u }
@@ -81,9 +87,18 @@ class SorterKt(private val ktClass: KtClass) {
         resultMethods: LinkedHashMap<String, KtNamedFunction>,
         psiElement: PsiElement
     ) {
-        // TODO: 2021/8/25 在没有方法体的后面 添加一个空行
         resultMethods.forEach {
-            ktClass.addBefore(it.value, psiElement)
+            try {
+                //通过添加非空注解的方式，解决2个单行方法中间没有空格换行的问题
+                if (it.value.isInSingleLine()) {
+                    val faName = FqName("NonNull")
+                    it.value.addAnnotation(faName, "", "", null)
+                }
+                ktClass.addBefore(it.value, psiElement)
+            } catch (e: IncorrectOperationException) {
+                e.printStackTrace()
+            }
+
         }
     }
 

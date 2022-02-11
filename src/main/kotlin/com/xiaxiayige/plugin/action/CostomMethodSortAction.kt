@@ -1,6 +1,5 @@
 package com.xiaxiayige.plugin.action
 
-import com.android.tools.idea.room.migrations.generators.KotlinMigrationClassGenerator
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
@@ -9,6 +8,8 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiManager
+import com.intellij.psi.codeStyle.CodeStyleManager
 import com.intellij.psi.util.PsiTreeUtil
 import com.xiaxiayige.plugin.action.utils.Sorter
 import com.xiaxiayige.plugin.action.utils.SorterKt
@@ -51,7 +52,7 @@ class CostomMethodSortAction : AnAction() {
     }
 
     private fun isTargetFileType(psiFile: PsiFile?, targetType: String) = psiFile?.name?.endsWith(targetType, true)
-            ?: false
+        ?: false
 
     private fun getMethodRule(project: Project?): ArrayList<String> {
         val methodNames = ArrayList<String>()
@@ -86,6 +87,11 @@ class CostomMethodSortAction : AnAction() {
         ktClass?.let {
             WriteCommandAction.runWriteCommandAction(ktClass.project) {
                 SorterKt(ktClass).sort(methodsRule)
+
+                //格式化代码
+                val psiManager = PsiManager.getInstance(ktClass.project)
+                val codeStyleManager = CodeStyleManager.getInstance(psiManager)
+                codeStyleManager.reformat(ktClass)
             }
         }
 
