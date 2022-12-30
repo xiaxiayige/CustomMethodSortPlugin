@@ -1,7 +1,7 @@
 plugins {
-    id("org.jetbrains.intellij") version "0.6.5"
+    id("org.jetbrains.intellij") version "1.11.0"
     java
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.7.22"
 }
 
 val pluginGroup: String by project
@@ -12,7 +12,9 @@ val pluginUntilBuild: String by project
 group = pluginGroup
 version = pluginVersion
 
+
 repositories {
+    maven(url = "https://plugins.gradle.org/m2/")
     mavenCentral()
     google()
     maven(url = "https://www.jetbrains.com/intellij-repository/snapshots")
@@ -25,22 +27,10 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    setPlugins("java", "android", "Kotlin")
-    localPath = "C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.2"
-    instrumentCode = false
+    plugins.set(listOf("java", "android", "Kotlin"))
+    version.set("2022.1.1")
+    instrumentCode.set(false)
 }
-
-tasks.patchPluginXml {
-    version(pluginVersion)
-    sinceBuild(pluginSinceBuild)
-    untilBuild(pluginUntilBuild)
-}
-
-
-tasks.runIde {
-    jvmArgs("--add-exports", "java.base/jdk.internal.vm=ALL-UNNAMED")
-}
-
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -53,10 +43,17 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
+
+    patchPluginXml {
+        version.set(pluginVersion)
+        sinceBuild.set(pluginSinceBuild)
+        untilBuild.set(pluginUntilBuild)
+
+    }
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
-    changeNotes(
+    changeNotes.set(
         """
           How to use .<br>
           1.Add ‘sortMethod.rule’ file to your project dir. <br>
@@ -79,7 +76,8 @@ tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml
           1.0.2 support Android Studio Arctic Fox 
           
           1.0.4 support more height version
-
+          
+          1.0.7 support more height version
       """
     )
 }

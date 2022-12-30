@@ -2,14 +2,19 @@ package com.xiaxiayige.plugin.action.utils
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiManager
+import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.codeStyle.CodeStyleManager
+import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import com.intellij.util.IncorrectOperationException
 import org.jetbrains.kotlin.idea.util.addAnnotation
+import org.jetbrains.kotlin.idea.util.hasJvmFieldAnnotation
 import org.jetbrains.kotlin.j2k.isInSingleLine
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtNamedFunction
+import org.jetbrains.kotlin.psi.psiUtil.getAnnotationEntries
+import org.jetbrains.kotlin.util.isAnnotated
 
 /***
  * 对Kotlin文件排序
@@ -32,10 +37,10 @@ class SorterKt(private val ktClass: KtClass) {
 
         getResultMethodsForRule(rule, resultMethods)
 
-        val psiElement: PsiElement = ktClass.body!!.functions[0].originalElement
+        val funOriginalElement: PsiElement = ktClass.body?.functions?.first()?.originalElement!!
         //重新设置代码方法顺序
 
-        resetKtNameFunctionOrder(resultMethods, psiElement)
+        resetKtNameFunctionOrder(resultMethods, funOriginalElement)
 
         deleteOldKtNameFunctionMetthod()
     }
@@ -84,21 +89,21 @@ class SorterKt(private val ktClass: KtClass) {
      * 重新设置方法的顺序
      */
     private fun resetKtNameFunctionOrder(
-        resultMethods: LinkedHashMap<String, KtNamedFunction>,
-        psiElement: PsiElement
+        resultMethods: LinkedHashMap<String, KtNamedFunction>, funOriginalElement: PsiElement
     ) {
-        resultMethods.forEach {
+
+        resultMethods.forEach { _, ktNameFunction ->
+            ktClass.addBefore(ktNameFunction, funOriginalElement)
+
             try {
                 //通过添加非空注解的方式，解决2个单行方法中间没有空格换行的问题
-                if (it.value.isInSingleLine()) {
-                    val faName = FqName("NonNull")
-                    it.value.addAnnotation(faName, "", "", null)
+                if (!ktNameFunction.hasBlockBody() && ktNameFunction.annotationEntries.isNullOrEmpty()) {
+                    val aa = PsiWhiteSpaceImpl("")
+                    ktClass.addBefore(aa, ktNameFunction)
                 }
-                ktClass.addBefore(it.value, psiElement)
             } catch (e: IncorrectOperationException) {
                 e.printStackTrace()
             }
-
         }
     }
 
