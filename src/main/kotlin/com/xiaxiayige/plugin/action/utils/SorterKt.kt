@@ -1,8 +1,6 @@
 package com.xiaxiayige.plugin.action.utils
 
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiManager
-import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.codeStyle.CodeStyleManager
 import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import com.intellij.util.IncorrectOperationException
@@ -42,7 +40,7 @@ class SorterKt(private val ktClass: KtClass) {
 
         resetKtNameFunctionOrder(resultMethods, funOriginalElement)
 
-        deleteOldKtNameFunctionMetthod()
+        deleteOldKtNameFunctionMethod()
     }
 
     /**
@@ -94,21 +92,20 @@ class SorterKt(private val ktClass: KtClass) {
 
         resultMethods.forEach { _, ktNameFunction ->
             ktClass.addBefore(ktNameFunction, funOriginalElement)
-
-            try {
-                //通过添加非空注解的方式，解决2个单行方法中间没有空格换行的问题
-                if (!ktNameFunction.hasBlockBody() && ktNameFunction.annotationEntries.isNullOrEmpty()) {
-                    val aa = PsiWhiteSpaceImpl("")
-                    ktClass.addBefore(aa, ktNameFunction)
-                }
-            } catch (e: IncorrectOperationException) {
-                e.printStackTrace()
-            }
+//            try {
+//                //通过添加非空注解的方式，解决2个单行方法中间没有空格换行的问题
+//                if (!ktNameFunction.hasBlockBody() && ktNameFunction.annotationEntries.isNullOrEmpty()) {
+//                    val aa = PsiWhiteSpaceImpl("666666")
+//                    ktClass.addBefore(aa, ktNameFunction.originalElement)
+//                }
+//            } catch (e: IncorrectOperationException) {
+//                e.printStackTrace()
+//            }
         }
     }
 
     //删除原来的方法
-    private fun deleteOldKtNameFunctionMetthod() {
+    private fun deleteOldKtNameFunctionMethod() {
         methods.forEach { (_, u) -> u.delete() }
     }
 
